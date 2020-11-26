@@ -13,7 +13,7 @@ defmodule ApiElixir.Repo.Migrations.CreatePayments do
       add :installment_amount, :decimal
       add :date_approved, :naive_datetime
       add :date_created, :naive_datetime
-      add :payer_id, :integer
+      add :payer_id, :bigint
       add :order_id, references(:orders)
 
       timestamps()

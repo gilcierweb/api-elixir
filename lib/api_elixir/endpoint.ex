@@ -4,7 +4,6 @@ defmodule ApiElixir.Endpoint do
   use Plug.ErrorHandler
 
   alias ApiElixir.Router
-  alias Plug.{Adapters.Cowboy2, HTML}
 
   require Logger
 

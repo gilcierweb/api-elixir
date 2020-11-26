@@ -5,7 +5,7 @@ defmodule ApiElixir.Neighborhood do
   schema "neighborhoods" do
     field :name, :string
 
-    belongs_to :city_id, ApiElixir.City
+    belongs_to :city, ApiElixir.City
 
     timestamps()
   end

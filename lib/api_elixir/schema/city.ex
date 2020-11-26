@@ -5,7 +5,7 @@ defmodule ApiElixir.City do
   schema "states" do
     field :name, :string
 
-    belongs_to :state_id, ApiElixir.State
+    belongs_to :state, ApiElixir.State
     has_many :neighborhoods, ApiElixir.Neighborhood
     has_many :receiver_addresses, ApiElixir.ReceiverAddress
 

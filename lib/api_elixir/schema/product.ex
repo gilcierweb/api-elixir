@@ -4,13 +4,13 @@ defmodule ApiElixir.Product do
 
   schema "products" do
     field :name, :string
-    field :name, :string
     field :sku, :string
     field :quantity, :integer
     field :price, :decimal
     field :price_old, :decimal
-    field :description, :text
-    belongs_to :store_id, ApiElixir.Store
+    field :description, :string
+    belongs_to :store, ApiElixir.Store
+    has_many :order_items, ApiElixir.OrderItem
 
     timestamps()
   end

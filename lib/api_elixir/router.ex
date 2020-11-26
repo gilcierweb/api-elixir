@@ -11,6 +11,7 @@ defmodule ApiElixir.Router do
   )
   plug(:match)
   plug(:dispatch)
+  alias ApiElixir.Insert
 
   @content_type "application/json"
 
@@ -20,6 +21,7 @@ defmodule ApiElixir.Router do
 #    |> send_resp(200, message())
 #  end
   get "/" do
+
     page = EEx.eval_file(
       "web/templates/index.html.eex",
       [name: 'gilcierweb']
@@ -63,6 +65,9 @@ defmodule ApiElixir.Router do
   end
 
   post "/checkout" do
+   params = conn.params |> Jason.encode! |> Jason.decode!
+    |> IO.inspect
+    Insert.create(params)
     #    query = URI.encode_query(conn.params)
     #    url = "https://api.github.com/search/repositories?#{query}"
     url = "https://delivery-center-recruitment-ap.herokuapp.com/"

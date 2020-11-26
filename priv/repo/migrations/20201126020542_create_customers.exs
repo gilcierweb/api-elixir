@@ -8,9 +8,9 @@ defmodule ApiElixir.Repo.Migrations.CreateCustomers do
       add :nickname, :string, null: false
       add :email, :string, null: false
       add :area_code, :integer
-      add :phone_number, :integer
+      add :phone_number, :bigint
       add :doc_type, :string
-      add :doc_number, :integer
+      add :doc_number, :bigint
       add :receiver_address_id, references(:receiver_addresses)
 
       timestamps()

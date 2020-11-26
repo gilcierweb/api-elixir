@@ -7,7 +7,7 @@ defmodule ApiElixir.Repo.Migrations.CreateReceiverAddresses do
       add :street_name, :string, null: false
       add :street_number, :string, null: false
       add :comment, :string
-      add :zip_code, :integer
+      add :zip_code, :bigint
       add :latitude, :decimal
       add :longitude, :decimal
       add :receiver_phone, :integer
