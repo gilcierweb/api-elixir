@@ -37,6 +37,11 @@ defmodule ApiElixir.ReceiverAddress do
          ]
        )
     |> receiver_phone_to_integer()
+    |> cast_assoc(:country)
+    |> cast_assoc(:state)
+    |> cast_assoc(:city)
+    |> cast_assoc(:neighborhood)
+    |> cast_assoc(:shippings)
   end
 
   def receiver_phone_to_integer(changeset) do

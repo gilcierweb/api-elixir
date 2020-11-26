@@ -9,4 +9,15 @@ defmodule ApiElixir.Neighborhood do
 
     timestamps()
   end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(
+         params,
+         [
+           :name,
+         ]
+       )
+    |> cast_assoc(:city)
+  end
 end

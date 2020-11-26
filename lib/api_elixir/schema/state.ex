@@ -11,4 +11,17 @@ defmodule ApiElixir.State do
 
     timestamps()
   end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(
+         params,
+         [
+           :name,
+         ]
+       )
+    |> cast_assoc(:country)
+    |> cast_assoc(:cities)
+    |> cast_assoc(:receiver_addresses)
+  end
 end

@@ -24,5 +24,7 @@ defmodule ApiElixir.OrderItem do
            :order_id
          ]
        )
+    |> cast_assoc(:product)
+    |> cast_assoc(:order)
   end
 end

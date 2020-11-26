@@ -16,4 +16,16 @@ defmodule ApiElixir.Customer do
 
     timestamps()
   end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(
+         params,
+         [
+           :name,
+         ]
+       )
+    |> cast_assoc(:receiver_address)
+    |> cast_assoc(:orders)
+  end
 end

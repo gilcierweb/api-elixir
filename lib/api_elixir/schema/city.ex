@@ -2,7 +2,7 @@ defmodule ApiElixir.City do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "states" do
+  schema "cities" do
     field :name, :string
 
     belongs_to :state, ApiElixir.State
@@ -10,5 +10,18 @@ defmodule ApiElixir.City do
     has_many :receiver_addresses, ApiElixir.ReceiverAddress
 
     timestamps()
+  end
+
+  def changeset(struct, params) do
+    struct
+    |> cast(
+         params,
+         [
+           :name,
+         ]
+       )
+    |> cast_assoc(:state)
+    |> cast_assoc(:receiver_addresses)
+    |> cast_assoc(:neighborhoods)
   end
 end

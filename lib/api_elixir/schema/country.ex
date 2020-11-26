@@ -11,4 +11,29 @@ defmodule ApiElixir.Country do
 
     timestamps()
   end
+
+  def changeset(struct, params) do
+    params_db = %{"abbreviation" => params["id"], "name" => params["name"]}
+    struct
+    |> cast(
+         params_db,
+         [
+           :abbreviation,
+           :name,
+         ]
+       )
+    |> cast_assoc(:states)
+    |> cast_assoc(:receiver_addresses)
+  end
+
+  def abbreviation_parse(changeset) do
+    abbreviation = get_field(changeset, :id)
+
+    if is_bitstring(abbreviation) do
+      put_change(changeset, :abbreviation, abbreviation)
+    else
+      changeset
+    end
+
+  end
 end
