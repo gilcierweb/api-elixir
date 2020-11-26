@@ -14,7 +14,7 @@ defmodule ApiElixir.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy],
+      extra_applications: [:logger, :plug_cowboy, :postgrex, :ecto, :httpoison],
       mod: {ApiElixir.Application, []}
     ]
   end
@@ -22,7 +22,9 @@ defmodule ApiElixir.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto, "~> 3.5"},
+      {:httpoison, "~> 1.7"},
+      {:postgrex, "~> 0.15.7"},
+      {:ecto_sql, "~> 3.5"},
       {:jason, "~> 1.2"},
       {:plug, "~> 1.11"},
       {:plug_cowboy, "~> 2.4"},

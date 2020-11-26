@@ -1,0 +1,5 @@
+<footer>
+    <div id="copyright" class="clear col-lg-12 col-md-12 col-sm-12 text-center">
+        <p>Copyright &copy; <%= Date.utc_today().year%> - All Rights Reserved - <a href="https://gilcierweb.com.br">gilcierweb.com.br</a> - Desenvolvido por: GilcierWeb</p>
+    </div>
+</footer>

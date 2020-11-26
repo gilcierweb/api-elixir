@@ -43,7 +43,7 @@ defmodule ApiElixir.Endpoint do
 
   defp process_events(events) when is_list(events) do
     # Do some processing on a list of events
-    Jason.encode!(%{response: "Received Events!"})
+    Jason.encode!(%{response:  Jason.encode!})
   end
 
   defp process_events(_) do

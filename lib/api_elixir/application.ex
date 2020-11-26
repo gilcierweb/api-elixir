@@ -11,6 +11,7 @@ defmodule ApiElixir.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      ApiElixir.Repo,
       # Endpoint
       # Starts a worker by calling: ApiElixir.Worker.start_link(arg)
       # {ApiElixir.Worker, arg}
