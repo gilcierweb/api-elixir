@@ -11,7 +11,6 @@ defmodule ApiElixir.Repo.Migrations.CreateCustomers do
       add :phone_number, :bigint
       add :doc_type, :string
       add :doc_number, :bigint
-      add :receiver_address_id, references(:receiver_addresses)
 
       timestamps()
     end

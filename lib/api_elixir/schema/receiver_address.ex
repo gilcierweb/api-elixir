@@ -16,6 +16,7 @@ defmodule ApiElixir.ReceiverAddress do
     belongs_to :state, ApiElixir.State
     belongs_to :city, ApiElixir.City
     belongs_to :neighborhood, ApiElixir.Neighborhood
+    belongs_to :customer, ApiElixir.Customer
     has_many :shippings, ApiElixir.Shipping
 
     timestamps()

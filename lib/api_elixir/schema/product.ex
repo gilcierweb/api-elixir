@@ -14,4 +14,22 @@ defmodule ApiElixir.Product do
 
     timestamps()
   end
+
+  def changeset(struct, params) do
+    params_db = %{"sku" => params["id"], "name" => params["title"]}
+    struct
+    |> cast(
+         params_db,
+         [
+           :name,
+           :sku,
+           :quantity,
+           :price,
+           :price_old,
+           :description,
+         ]
+       )
+    |> cast_assoc(:store)
+    |> cast_assoc(:order_items)
+  end
 end

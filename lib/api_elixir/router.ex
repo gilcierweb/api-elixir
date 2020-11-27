@@ -15,11 +15,11 @@ defmodule ApiElixir.Router do
 
   @content_type "application/json"
 
-#  get "/" do
-#    conn
-#    |> put_resp_content_type(@content_type)
-#    |> send_resp(200, message())
-#  end
+  #  get "/" do
+  #    conn
+  #    |> put_resp_content_type(@content_type)
+  #    |> send_resp(200, message())
+  #  end
   get "/" do
 
     page = EEx.eval_file(
@@ -65,22 +65,26 @@ defmodule ApiElixir.Router do
   end
 
   post "/checkout" do
-   params = conn.params |> Jason.encode! |> Jason.decode!
-    |> IO.inspect
+
+    params = conn.params
+             |> Jason.encode!
+             |> Jason.decode!
+
     Insert.create(params)
+
     #    query = URI.encode_query(conn.params)
     #    url = "https://api.github.com/search/repositories?#{query}"
     url = "https://delivery-center-recruitment-ap.herokuapp.com/"
-    headers = ["X-Sent": "09h25 - 24/10/19", "Accept": "Application/json; Charset=utf-8"]
+    headers = ["X-Sent": "#{date_format()}", "Accept": "Application/json; Charset=utf-8"]
     body_raw = ''
     #    save_db(body_raw)
     body = Jason.encode!(conn.params)
-    {:ok, response} = HTTPoison.post("https://delivery-center-recruitment-ap.herokuapp.com/", body, headers)
+    #    {:ok, response} = HTTPoison.post("https://delivery-center-recruitment-ap.herokuapp.com/", body, headers)
     #    {:ok, response} = HTTPoison.get(url, [], [])
-    send_resp(conn, response.status_code, response.body)
-    #    conn
-    #    |> put_resp_content_type("application/json")
-    #    |> send_resp(response.status_code, response.body)
+    #    send_resp(conn, response.status_code, response.body)
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, 'body')
   end
 
   match _ do
@@ -124,6 +128,11 @@ defmodule ApiElixir.Router do
         text: "GilcierWeb"
       }
     )
+  end
+
+  def date_format do
+    date_current = DateTime.utc_now
+    "#{date_current.hour}h#{date_current.minute} - #{date_current.day}/#{date_current.month}/#{date_current.year}"
   end
 
   def handle_errors(conn, %{kind: kind, reason: reason, stack: stack}) do

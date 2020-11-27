@@ -22,5 +22,6 @@ defmodule ApiElixir.Shipping do
          ]
        )
     |> cast_assoc(:receiver_address)
+    |> cast_assoc(:orders)
   end
 end

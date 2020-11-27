@@ -16,6 +16,7 @@ defmodule ApiElixir.Repo.Migrations.CreateReceiverAddresses do
       add :state_id, references(:states)
       add :city_id, references(:cities)
       add :neighborhood_id, references(:neighborhoods)
+      add :customer_id, references(:customers)
 
       timestamps()
     end
