@@ -19,10 +19,6 @@ defmodule ApiElixir.Endpoint do
 
   plug(:dispatch)
 
-#  get "/", to: Router do
-#    send_resp(conn, 200, "pong!")
-#  end
-
   forward("/", to: Router)
 
   get "/ping" do
@@ -54,9 +50,4 @@ defmodule ApiElixir.Endpoint do
     Jason.encode!(%{error: "Expected Payload: { 'events': [...] }"})
   end
 
-  # A catchall route, 'match' will match no matter the request method,
-  # so a response is always returned, even if there is no route to match.
-  match _ do
-    send_resp(conn, 404, "oops... Nothing here :(")
-  end
 end

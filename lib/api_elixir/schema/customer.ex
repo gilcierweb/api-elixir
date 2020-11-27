@@ -18,28 +18,24 @@ defmodule ApiElixir.Customer do
     timestamps()
   end
 
-  #  def changeset(struct, params) do
-  #    IO.puts 'paramssdfsdfsdfsdfsdf'
-  #    IO.inspect params
-  #    params =   params["buyer"] #Map.delete(params["buyer"], "billing_info")
-  ##    params = Map.delete(params, "phone")
-  #    struct
-  #    |> cast(
-  #         params,
-  #         [
-  #           :first_name,
-  #           :last_name,
-  #           :nickname,
-  #           :email,
-  #           :area_code,
-  #           :phone_number,
-  #           :doc_type,
-  #           :doc_number,
-  #         ]
-  #       )
-  #    |> cast_assoc(:receiver_address)
-  #    |> cast_assoc(:orders)
-  #  end
+    def changeset(struct, params) do
+      struct
+      |> cast(
+           params,
+           [
+             :first_name,
+             :last_name,
+             :nickname,
+             :email,
+             :area_code,
+             :phone_number,
+             :doc_type,
+             :doc_number,
+           ]
+         )
+      |> cast_assoc(:receiver_addresses)
+      |> cast_assoc(:orders)
+    end
 
   def parse_data(params) do
     customer = params["buyer"]

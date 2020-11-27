@@ -35,6 +35,7 @@ defmodule ApiElixir.ReceiverAddress do
            :latitude,
            :longitude,
            :receiver_phone,
+           :customer_id,
          ]
        )
     |> receiver_phone_to_integer()
@@ -42,6 +43,7 @@ defmodule ApiElixir.ReceiverAddress do
     |> cast_assoc(:state)
     |> cast_assoc(:city)
     |> cast_assoc(:neighborhood)
+    |> cast_assoc(:customer)
     |> cast_assoc(:shippings)
   end
 

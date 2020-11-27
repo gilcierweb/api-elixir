@@ -27,9 +27,20 @@ defmodule ApiElixir.Product do
            :price,
            :price_old,
            :description,
+           :store_id,
          ]
        )
     |> cast_assoc(:store)
     |> cast_assoc(:order_items)
   end
+
+  def parse_data(params) do
+    %{
+      sku: params["item"]["id"],
+      name: params["item"]["title"],
+      price: params["unit_price"],
+      quantity: params["quantity"],
+      price_old: params["full_unit_price"],
+    }
+    end
 end

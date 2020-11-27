@@ -24,7 +24,6 @@ defmodule ApiElixir.Order do
   end
 
   def changeset(struct, params) do
-
     struct
     |> cast(
          params,
@@ -40,22 +39,12 @@ defmodule ApiElixir.Order do
          ]
        )
     |> cast_assoc(:customer)
-      #    |> Repo.preload(:customer)
-      #    |> cast_assoc(:customer)
-      #    |> cast_assoc(:store)
-      #    |> put_assoc(:customer ,customer)
     |> put_assoc(:store, %{name: Store.generate_name()})
     |> put_assoc(:customer, Customer.parse_data(params))
-      #    |> cast_assoc(:customer)
-      #    |> put_assoc(:customer, params["buyer"])
-      #    |> build_assoc(post, :comments, comment_params)
     |> cast_assoc(:shipping)
     |> cast_assoc(:order_items)
     |> cast_assoc(:payments)
-    #    |> foreign_key_constraint(:customer_id)
-    #    |> assoc_constraint(:customer)
-    #    |> Ecto.build_assoc(:payments)
-    #    |> Ecto.build_assoc(:order_items)
+
   end
 
 end

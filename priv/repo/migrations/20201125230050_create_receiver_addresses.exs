@@ -10,7 +10,7 @@ defmodule ApiElixir.Repo.Migrations.CreateReceiverAddresses do
       add :zip_code, :bigint
       add :latitude, :decimal
       add :longitude, :decimal
-      add :receiver_phone, :integer
+      add :receiver_phone, :bigint
 
       add :country_id, references(:countries)
       add :state_id, references(:states)

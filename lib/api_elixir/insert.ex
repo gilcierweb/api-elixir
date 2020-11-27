@@ -1,17 +1,9 @@
 defmodule ApiElixir.Insert do
-  alias ApiElixir.{Order, Store, OrderItem, Payment,Customer, Repo}
+  alias ApiElixir.{Order, Repo}
 
   def create(params) do
-#    customer = Customer.changeset(%Customer{}, params)
-#    customer = Repo.insert!(customer)
-#    order = Ecto.build_assoc(customer, :orders, params)
     order = Order.changeset(%Order{}, params)
-#    order = customer |> Order.changeset(%Order{}, params)
-##    order = Ecto.build_assoc(customer, :orders, params)
-    order = Repo.insert!(order)
-
-#    customer = Ecto.build_assoc(order, :customer, params[:buyer])
-#    customer = Repo.insert!(customer)
+    Repo.insert!(order)
   end
 
   def add(params) do

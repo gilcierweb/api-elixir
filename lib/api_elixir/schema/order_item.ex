@@ -1,6 +1,7 @@
 defmodule ApiElixir.OrderItem do
   use Ecto.Schema
   import Ecto.Changeset
+  alias ApiElixir.{Product, Order, Repo}
 
   schema "order_items" do
     field :quantity, :integer
@@ -21,10 +22,14 @@ defmodule ApiElixir.OrderItem do
            :full_unit_price,
            :quantity,
            :unit_price,
-           :order_id
+           :order_id,
+           :product_id,
+
          ]
        )
-    |> cast_assoc(:product)
+#    |> cast_assoc(:product)
+    |> put_assoc(:product, Product.parse_data(params))
     |> cast_assoc(:order)
   end
+
 end
