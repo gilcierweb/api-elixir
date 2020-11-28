@@ -30,6 +30,11 @@ https://github.com/asdf-vm/asdf-elixir
 mix do deps.get, deps.compile, compile
 mix ecto.create 
 mix ecto.migrate
+
+MIX_ENV=test mix ecto.create
+MIX_ENV=test mix ecto.migrate
+MIX_ENV=test mix test
+
 iex -S mix
 
 mix run --no-halt # run http://localhost:4000
