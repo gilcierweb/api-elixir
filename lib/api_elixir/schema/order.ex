@@ -44,6 +44,7 @@ defmodule ApiElixir.Order do
     |> cast_assoc(:shipping)
     |> cast_assoc(:order_items)
     |> cast_assoc(:payments)
+    |> validate_required([:total_amount, :status])
 
   end
 
