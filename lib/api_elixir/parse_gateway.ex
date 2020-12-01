@@ -17,7 +17,7 @@ defmodule ApiElixir.ParseGateway do
       longitude: params["shipping"]["receiver_address"]["longitude"],
       dtOrderCreate: date_current(),
       postalCode: params["shipping"]["receiver_address"]["zip_code"],
-      number: params["shipping"],
+      number: "0",
       customer: parse_customer(params),
       items: Enum.map(params["order_items"], &parse_item/1),
       payments: Enum.map(params["payments"], &parse_payment/1),
@@ -53,6 +53,7 @@ defmodule ApiElixir.ParseGateway do
   end
 
   def date_current do
-    DateTime.to_string(DateTime.utc_now)
+    DateTime.utc_now
+    |> DateTime.to_string
   end
 end

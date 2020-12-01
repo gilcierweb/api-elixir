@@ -1,4 +1,4 @@
-defmodule ApiElixir.CheckoutController do
+defmodule ApiElixir.Controllers.CheckoutController do
 
   def checkout( conn, _params) do
     params = conn.params

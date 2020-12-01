@@ -225,6 +225,18 @@ defmodule ApiElixirTest do
     assert conn.status == 200
   end
 
+#  test "POST Error checkout" do
+#    params = ~s({ })
+#    json = params
+#    conn =
+#      conn(:post, "/checkout", json)
+#      |> put_req_header("content-type", "application/json")
+#      |> Router.call(@opts)
+#
+#    assert conn.state == :sent
+#    assert conn.status == 422
+#  end
+
   test "returns welcome" do
     conn =
       :get

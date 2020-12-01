@@ -53,7 +53,7 @@ defmodule ApiElixir.Router do
     body_parse_raw = ParseGateway.parse_data(params)
 
     url = "https://delivery-center-recruitment-ap.herokuapp.com/"
-    headers = ["X-Sent": "#{date_format()}", "Accept": "Application/json; Charset=utf-8"]
+    headers = ["X-Sent": "#{date_format()}", "Accept": "Application/json; Charset=utf-8", recv_timeout: 10_000]
     body = Jason.encode!(body_parse_raw)
 
     {:ok, response} = HTTPoison.post(url, body, headers, ssl: [versions: [:"tlsv1.2"]])
