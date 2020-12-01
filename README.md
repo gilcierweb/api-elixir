@@ -18,7 +18,7 @@ end
 - Elixir
 - PostgreSQL
 
-### Setup
+### Setup Elixir
 https://asdf-vm.com/#/core-manage-asdf
 
 https://github.com/asdf-vm/asdf-erlang
