@@ -35,6 +35,18 @@ defmodule ApiElixir.Customer do
          )
       |> cast_assoc(:receiver_addresses)
       |> cast_assoc(:orders)
+      |> validate_required(
+           [
+             :first_name,
+             :last_name,
+             :nickname,
+             :email,
+             :area_code,
+             :phone_number,
+             :doc_type,
+             :doc_number,
+           ]
+         )
     end
 
   def parse_data(params) do

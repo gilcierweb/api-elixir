@@ -21,6 +21,7 @@ defmodule ApiElixir.Endpoint do
 
   forward("/", to: Router)
 
+  # Only examples
   get "/ping" do
     send_resp(conn, 200, "pong!")
   end

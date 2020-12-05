@@ -19,5 +19,10 @@ defmodule ApiElixir.Neighborhood do
          ]
        )
     |> cast_assoc(:city)
+    |> validate_required(
+         [
+           :name,
+         ]
+       )
   end
 end

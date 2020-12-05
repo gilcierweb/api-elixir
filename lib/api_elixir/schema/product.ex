@@ -32,6 +32,12 @@ defmodule ApiElixir.Product do
        )
     |> cast_assoc(:store)
     |> cast_assoc(:order_items)
+    |> validate_required(
+         [
+           :name,
+           :sku,
+         ]
+       )
   end
 
   def parse_data(params) do

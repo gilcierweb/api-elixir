@@ -45,6 +45,19 @@ defmodule ApiElixir.ReceiverAddress do
     |> cast_assoc(:neighborhood)
     |> cast_assoc(:customer)
     |> cast_assoc(:shippings)
+    |> validate_required(
+         [
+           :address_line,
+           :street_name,
+           :street_number,
+           :comment,
+           :zip_code,
+           :latitude,
+           :longitude,
+           :receiver_phone,
+
+         ]
+       )
   end
 
   def receiver_phone_to_integer(changeset) do

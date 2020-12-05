@@ -4,6 +4,7 @@ defmodule ApiElixir.Router do
   if Mix.env == :dev do
     use Plug.Debugger
   end
+
   plug(
     Plug.Parsers,
     parsers: [:json],
@@ -13,53 +14,13 @@ defmodule ApiElixir.Router do
   plug(:match)
   plug(:dispatch)
 
-  alias ApiElixir.{Insert, ParseGateway, CheckoutController}
+  alias ApiElixir.Routes.{AuthorizedRouter, APIRouter, CheckoutRouter, HomeRouter}
 
-  @content_type "application/json"
-
-  get "/" do
-    page = EEx.eval_file(
-      "web/templates/index.html.eex",
-      [name: 'gilcierweb']
-    )
-    conn
-    |> put_resp_content_type("text/html")
-    |> send_resp(200, page)
-    |> halt
-  end
-
-  get "/gilcierweb" do
-    url = "https://api.github.com/users/gilcierweb/repos"
-    {:ok, response} = HTTPoison.get(url, [], [])
-    conn
-    |> put_resp_content_type(@content_type)
-    |> send_resp(200, response.body)
-  end
-
-  get "/success" do
-    conn
-    |> put_resp_content_type(@content_type)
-    |> send_resp(200, success())
-  end
-
-  #  post "/checkout", CheckoutController, :checkout
-  post "/checkout" do
-
-    params = conn.params
-             |> Jason.encode!
-             |> Jason.decode!
-
-    Insert.create(params)
-    body_parse_raw = ParseGateway.parse_data(params)
-
-    url = "https://delivery-center-recruitment-ap.herokuapp.com/"
-    headers = ["X-Sent": "#{date_format()}", "Accept": "Application/json; Charset=utf-8", recv_timeout: 10_000]
-    body = Jason.encode!(body_parse_raw)
-
-    {:ok, response} = HTTPoison.post(url, body, headers, ssl: [versions: [:"tlsv1.2"]])
-    send_resp(conn, response.status_code, response.body)
-
-  end
+  forward "/", to: HomeRouter
+  forward "/admin", to: AuthorizedRouter
+  forward "/api", to: APIRouter
+  forward "/checkout", to: CheckoutRouter
+  # forward "/", to: ApiElixirPlug
 
   match _ do
     send_resp(conn, 404, "Requested page not found!")
@@ -81,25 +42,28 @@ defmodule ApiElixir.Router do
     )
   end
 
-  defp success do
-    Jason.encode!(
-      %{
-        status: "success",
-        text: "Compra realizada com sucesso!"
-      }
-    )
-  end
-
-  def date_format do
-    date_current = DateTime.utc_now
-    "#{date_current.hour}h#{date_current.minute} - #{date_current.day}/#{date_current.month}/#{date_current.year}"
-  end
-
   def handle_errors(conn, %{kind: kind, reason: reason, stack: stack}) do
     IO.inspect(kind, label: :kind)
     IO.inspect(reason, label: :reason)
     IO.inspect(stack, label: :stack)
     send_resp(conn, conn.status, "Something went wrong")
   end
+
+  @template_dir "lib/api_elixir/web/templates"
+
+  def render(%{status: status} = conn, template, assigns \\ []) do
+    body =
+      @template_dir
+      |> Path.join(template)
+      |> String.replace_suffix(".html", ".html.eex")
+      |> EEx.eval_file(assigns)
+
+    send_resp(conn, (status || 200), body)
+  end
+
+  #  def render_json(%{status: status} = conn, data) do
+  #    body = Jason.encode!(data)
+  #    send_resp(conn, (status || 200), body)
+  #  end
 
 end

@@ -1,31 +1,19 @@
-# API Elixir
+# API Elixir and PostgreSQL with Plug (Standalone)
 
 **Mix generate project without frameworks(No Phoenix, No Maru and etc)**
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `api_elixir` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:api_elixir, "~> 0.1.0"}
-  ]
-end
-```
 ### Skills
 - Elixir
 - PostgreSQL
 
-### Setup Elixir
+### Setup Elixir (local)
 https://asdf-vm.com/#/core-manage-asdf
 
 https://github.com/asdf-vm/asdf-erlang
 
 https://github.com/asdf-vm/asdf-elixir
 
-### Get Started
+### Development without docker
 ```shell
 mix do deps.get, deps.compile, compile
 mix ecto.create 
@@ -40,14 +28,23 @@ iex -S mix
 mix run --no-halt # run http://localhost:4000
 
 ```
-### Routes
+run in local http://localhost:4000
+
+### List All Routes
+
 ```elixir
 # get http://localhost:4000
 # get http://localhost:4000/gilcierweb
 # post http://localhost:4000/checkout # payload order
-# get http://localhost:4000/success # success order payment gateway
+# get http://localhost:4000/checkout/success # success order payment gateway
+# get http://localhost:4000/admin/authorized 
+# get http://localhost:4000/admin/unauthorized
+# get http://localhost:4000/api/secret
+# get http://localhost:4000/api/open
 ```
+
 post http://localhost:4000/checkout # payload order
+
 ```json
 {
   "id": 9987071,
@@ -137,6 +134,17 @@ post http://localhost:4000/checkout # payload order
   }
 }
 ```
+### Development with docker and docker-compose
+```shell
+docker-compose build
+docker-compose up # run http://localhost:4000
+docker-compose run --rm web mix ecto.create
+docker-compose run --rm web mix ecto.migrate
+docker-compose run --rm web bash
+```
+
+run with docker http://localhost:4000
+
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/api_elixir](https://hexdocs.pm/api_elixir).

@@ -44,7 +44,18 @@ defmodule ApiElixir.Order do
     |> cast_assoc(:shipping)
     |> cast_assoc(:order_items)
     |> cast_assoc(:payments)
-    |> validate_required([:total_amount, :status])
+    |> validate_required(
+         [
+           :total_amount,
+           :total_amount_with_shipping,
+           :paid_amount,
+           :status,
+           :date_created,
+           :date_closed,
+           :last_updated,
+           :expiration_date
+         ]
+       )
 
   end
 

@@ -256,4 +256,16 @@ defmodule ApiElixirTest do
     assert conn.state == :sent
     assert conn.status == 404
   end
+
+  test "returns hello world" do
+    options = ApiElixirPlug.init([])
+
+    conn =
+      conn(:get, "/hello")
+      |> ApiElixirPlug.call(options)
+
+    assert conn.state == :sent
+    assert conn.status == 200
+    assert conn.resp_body == "Hello, World!"
+  end
 end

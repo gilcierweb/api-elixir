@@ -23,5 +23,11 @@ defmodule ApiElixir.Shipping do
        )
     |> cast_assoc(:receiver_address)
     |> cast_assoc(:orders)
+    |> validate_required(
+         [
+           :shipment_type,
+           :date_created,
+         ]
+       )
   end
 end

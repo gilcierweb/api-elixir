@@ -24,6 +24,12 @@ defmodule ApiElixir.Country do
        )
     |> cast_assoc(:states)
     |> cast_assoc(:receiver_addresses)
+    |> validate_required(
+         [
+           :abbreviation,
+           :name,
+         ]
+       )
   end
 
   def abbreviation_parse(changeset) do

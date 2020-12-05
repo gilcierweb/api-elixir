@@ -30,6 +30,13 @@ defmodule ApiElixir.OrderItem do
 #    |> cast_assoc(:product)
     |> put_assoc(:product, Product.parse_data(params))
     |> cast_assoc(:order)
+    |> validate_required(
+         [
+           :full_unit_price,
+           :quantity,
+           :unit_price,
+         ]
+       )
   end
 
 end

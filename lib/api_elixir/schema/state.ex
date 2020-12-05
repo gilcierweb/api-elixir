@@ -23,5 +23,10 @@ defmodule ApiElixir.State do
     |> cast_assoc(:country)
     |> cast_assoc(:cities)
     |> cast_assoc(:receiver_addresses)
+    |> validate_required(
+         [
+           :name,
+         ]
+       )
   end
 end

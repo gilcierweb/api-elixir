@@ -38,5 +38,20 @@ defmodule ApiElixir.Payment do
            :payer_id,
          ]
        )
+    |> validate_required(
+         [
+           :installments,
+           :payment_type,
+           :status,
+           :transaction_amount,
+           :taxes_amount,
+           :shipping_cost,
+           :total_paid_amount,
+           :installment_amount,
+           :date_approved,
+           :date_created,
+           :payer_id,
+         ]
+       )
   end
 end

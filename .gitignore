@@ -26,6 +26,7 @@ api_elixir-*.tar
 # Temporary files for e.g. tests
 /tmp
 
+.env
 # Editor directories and files
 .idea
 .vscode
